@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import { useAppSelector } from 'shared/lib/hooks/useAppSelector';
 import { ListCard, VerticalList, Loader } from 'shared/ui';
 import { IMAGE_URL } from 'shared/api/setup';
 import { SelectPage } from '../../features/selectPage';
-import { Link } from 'react-router-dom';
 import { usePeopleActions } from '../../entities/person/lib/hooks/usePeopleActions';
 
 export const People = () => {
@@ -13,7 +13,7 @@ export const People = () => {
 
   useEffect(() => {
     getPeople(page);
-  }, [page]);
+  }, [getPeople, page]);
 
   if (error) {
     return (

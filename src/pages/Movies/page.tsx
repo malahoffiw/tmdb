@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 
-import { getMovies } from 'entities/movie/model/actionCreators/getMovies';
 import { useMoviesActions } from 'entities/movie/lib/hooks/useMoviesActions';
 import { useAppSelector } from 'shared/lib/hooks/useAppSelector';
 import { ListCard, VerticalList, Loader } from 'shared/ui';
@@ -15,7 +14,7 @@ export const Movies = () => {
 
   useEffect(() => {
     getMovies(page, movieType);
-  }, [page, movieType]);
+  }, [page, movieType, getMovies]);
 
   if (error) {
     return (

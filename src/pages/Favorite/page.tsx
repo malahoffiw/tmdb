@@ -62,7 +62,7 @@ export const Favorite = () => {
 
   return (
     <div className="container mx-auto mt-16 px-6 text-neutral-900 dark:text-neutral-100">
-      <h1 className="mb-4 text-pink-900 dark:text-pink-100">Favorite</h1>
+      <h1 className="my-4 md:mt-0 text-pink-900 dark:text-pink-100 sm:text-xl">Favorite</h1>
       <FavoriteList>
         {movies.map((movie: MovieShort) => (
           <Link to={`/movies/${movie.id}`} key={movie.id}>

@@ -25,7 +25,7 @@ export const useExactPerson = (id: number) => {
           imagePath: res.profile_path,
           bio: res.biography,
           placeOfBirth: res.place_of_birth,
-          birthday: res.birthday,
+          birthday: res.birthday ?? '',
           deathday: res.deathday ?? '',
           credits: res.credits.cast.map((movie: { id: number; title: string; poster_path: string }) => ({
             id: movie.id,

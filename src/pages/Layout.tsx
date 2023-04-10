@@ -1,11 +1,16 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { LinkProps, Outlet, useMatch, useResolvedPath } from 'react-router-dom';
 import { HiMenu } from 'react-icons/hi';
 
 import { ToggleTheme } from 'features/toggleTheme';
 import { Header, Modal, MenuList, MenuOption, HeaderButton } from 'shared/ui';
+import { NavOption, NavBar } from '../shared/ui';
+import { AiOutlineHome } from 'react-icons/ai';
+import { BsStar, BsPerson } from 'react-icons/bs';
+import { RiMovie2Line } from 'react-icons/ri';
 
 export const Layout = () => {
+  const windowWidth = useRef(window.innerWidth);
   const [isOpen, setIsOpen] = useState(false);
   const [isClosed, setIsClosed] = useState(false);
 
@@ -22,29 +27,59 @@ export const Layout = () => {
   return (
     <div>
       <Header>
-        <HeaderButton onClick={handleOpenModal}>
-          <HiMenu />
-        </HeaderButton>
+        {windowWidth.current > 1024 ? (
+          <NavBar>
+            <NavLink to="/">
+              <AiOutlineHome size={20} />
+            </NavLink>
+            <NavLink to="/movies">
+              <RiMovie2Line size={20} />
+            </NavLink>
+            <NavLink to="/people">
+              <BsPerson size={20} />
+            </NavLink>
+            <NavLink to="/favorite">
+              <BsStar size={20} />
+            </NavLink>
+          </NavBar>
+        ) : (
+          <HeaderButton onClick={handleOpenModal}>
+            <HiMenu />
+          </HeaderButton>
+        )}
         <ToggleTheme />
       </Header>
-      <Modal isOpen={isOpen} isClosed={isClosed}>
-        <MenuList onClick={handleCloseModal}>
-          <MenuLink to="/" onClick={handleCloseModal}>
-            Home
-          </MenuLink>
-          <MenuLink to="/movies" onClick={handleCloseModal}>
-            Movies
-          </MenuLink>
-          <MenuLink to="/people" onClick={handleCloseModal}>
-            People
-          </MenuLink>
-          <MenuLink to="/favorite" onClick={handleCloseModal}>
-            Favorite
-          </MenuLink>
-        </MenuList>
-      </Modal>
+      {windowWidth.current <= 1024 && (
+        <Modal isOpen={isOpen} isClosed={isClosed}>
+          <MenuList onClick={handleCloseModal}>
+            <MenuLink to="/" onClick={handleCloseModal}>
+              Home
+            </MenuLink>
+            <MenuLink to="/movies" onClick={handleCloseModal}>
+              Movies
+            </MenuLink>
+            <MenuLink to="/people" onClick={handleCloseModal}>
+              People
+            </MenuLink>
+            <MenuLink to="/favorite" onClick={handleCloseModal}>
+              Favorite
+            </MenuLink>
+          </MenuList>
+        </Modal>
+      )}
       <Outlet />
     </div>
+  );
+};
+
+const NavLink = ({ children, to }: LinkProps) => {
+  let resolved = useResolvedPath(to);
+  let match = useMatch({ path: resolved.pathname, end: true });
+
+  return (
+    <NavOption match={match} to={to}>
+      {children}
+    </NavOption>
   );
 };
 
