@@ -8,39 +8,15 @@ import { HorizontalList, ListCard, Loader } from '../../../shared/ui';
 import { useExactMovie } from '../../../entities/movie/lib/hooks/useExactMovie';
 import { IMAGE_URL } from '../../../shared/api';
 import { useActions } from '../../../entities/movie/lib';
+import { favoriteStarAnimation } from '../../../shared/lib/favoriteStarAnimation';
 
 dayjs.extend(advancedFormat);
-
-const animationKeyframe = (el: Element, action: 'add' | 'remove' | 'remain') => {
-  let keyframes: Keyframe[] = [];
-
-  if (action === 'add') {
-    keyframes = [
-      { transform: 'scale(1)', opacity: 0 },
-      { transform: 'scaleX(1.5)', opacity: 1, offset: 0.75 },
-      { transform: 'scaleX(1)', opacity: 1 },
-    ];
-  }
-
-  if (action === 'remove') {
-    keyframes = [
-      { transform: 'scale(1)', opacity: 1 },
-      { transform: 'scale(1.5)', opacity: 1, offset: 0.33 },
-      { transform: 'scale(0.5)', opacity: 0 },
-    ];
-  }
-
-  return new KeyframeEffect(el, keyframes, {
-    duration: 200,
-    easing: 'ease-in-out',
-  });
-};
 
 export const ExactMovie = () => {
   const { id } = useParams();
   if (!id) throw new Error('Movie not found');
 
-  const [animationParent] = useAutoAnimate<HTMLButtonElement>(animationKeyframe);
+  const [animationParent] = useAutoAnimate<HTMLButtonElement>(favoriteStarAnimation);
 
   const { movie, isLoading, error } = useExactMovie(+id);
   const { toggleMovieFavorite } = useActions();
@@ -113,18 +89,6 @@ export const ExactMovie = () => {
             </div>
           )}
         </div>
-        {movie.similarMovies.length > 0 && (
-          <>
-            <p className="mt-6 mb-2">Similar movies</p>
-            <HorizontalList>
-              {movie.similarMovies.map((movie) => (
-                <Link to={`/movies/${movie.id}`} key={movie.id}>
-                  <ListCard title={movie.title} imageSrc={movie.posterPath ? `${IMAGE_URL}${movie.posterPath}` : ''} />
-                </Link>
-              ))}
-            </HorizontalList>
-          </>
-        )}
         {movie.cast.length > 0 && (
           <>
             <p className="mt-6 mb-2">Starring</p>
@@ -139,25 +103,62 @@ export const ExactMovie = () => {
             </HorizontalList>
           </>
         )}
+        {movie.reviews.length > 0 && (
+          <>
+            <p className="mt-6 mb-2">Reviews</p>
+            <div className="flex flex-col gap-2">
+              {movie.reviews.map((review) => (
+                <div
+                  key={review.id}
+                  className="flex flex-col gap-4 px-3 py-4 rounded bg-neutral-300 dark:bg-neutral-700"
+                >
+                  <div className="flex justify-between items-baseline">
+                    <p>{review.author}</p>
+                    <p className="text-xs">{dayjs(review.createdAt).format('MMMM Do, YYYY')}</p>
+                  </div>
+                  <p className="text-sm">{review.content}</p>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+        {movie.recommendedMovies.length > 0 && (
+          <>
+            <p className="mt-6 mb-2">Recommended movies</p>
+            <HorizontalList>
+              {movie.recommendedMovies.map((movie) => (
+                <Link to={`/movies/${movie.id}`} key={movie.id}>
+                  <ListCard title={movie.title} imageSrc={movie.posterPath ? `${IMAGE_URL}${movie.posterPath}` : ''} />
+                </Link>
+              ))}
+            </HorizontalList>
+          </>
+        )}
       </div>
       <div className="md:sticky md:top-16 max-h-[550px]">
         <img
-          className="mb-4 max-h-[500px] rounded drop-shadow-xl"
+          className="mb-4 mx-auto max-h-[500px] rounded drop-shadow-xl"
           src={movie.posterPath ? `${IMAGE_URL}${movie.posterPath}` : ''}
           alt={`${movie.title} poster`}
         />
-        <button
-          ref={animationParent}
-          className="group mx-auto flex items-center gap-2 px-4 py-2 rounded bg-neutral-300 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100"
-          onClick={handleStarClick}
-        >
-          <p>Favorite</p>
-          {movie.favorite ? (
-            <BsStarFill className="cursor-pointer text-yellow" size={20} />
-          ) : (
-            <BsStar className="cursor-pointer group-hover:text-yellow transition-colors" size={20} />
-          )}
-        </button>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-1 text-sm">
+            <p>Rating:</p>
+            <h1>{movie.voteAverage.toFixed(1)}</h1>
+          </div>
+          <button
+            ref={animationParent}
+            className="group flex items-center gap-2 px-4 py-2 rounded bg-neutral-300 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100"
+            onClick={handleStarClick}
+          >
+            <p>Favorite</p>
+            {movie.favorite ? (
+              <BsStarFill className="cursor-pointer text-yellow" size={20} />
+            ) : (
+              <BsStar className="cursor-pointer md:group-hover:text-yellow transition-colors" size={20} />
+            )}
+          </button>
+        </div>
       </div>
     </div>
   );

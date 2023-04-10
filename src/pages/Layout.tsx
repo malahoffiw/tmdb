@@ -41,9 +41,6 @@ export const Layout = () => {
           <MenuLink to="/favorite" onClick={handleCloseModal}>
             Favorite
           </MenuLink>
-          <MenuLink to="/rated" onClick={handleCloseModal}>
-            Rated
-          </MenuLink>
         </MenuList>
       </Modal>
       <Outlet />

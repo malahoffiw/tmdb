@@ -47,7 +47,7 @@ export const useExactMovie = (id: number) => {
           releaseDate: res.release_date,
           runtime: res.runtime,
           genres: res.genres,
-          similarMovies: res.similar.map((movie: { id: number; title: string; poster_path: string }) => ({
+          recommendedMovies: res.recommended.map((movie: { id: number; title: string; poster_path: string }) => ({
             id: movie.id,
             title: movie.title,
             posterPath: movie.poster_path,
@@ -56,6 +56,12 @@ export const useExactMovie = (id: number) => {
             id: person.id,
             name: person.name,
             imagePath: person.profile_path,
+          })),
+          reviews: res.reviews.map((review: { id: number; author: string; content: string; created_at: string }) => ({
+            id: review.id,
+            author: review.author,
+            content: review.content,
+            createdAt: review.created_at,
           })),
         });
 

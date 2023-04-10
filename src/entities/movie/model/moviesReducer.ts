@@ -2,7 +2,7 @@ import { MoviesAction, MoviesState } from './types';
 
 const initialState: MoviesState = {
   movies: [],
-  movieType: 'popular',
+  movieType: 'top_rated',
   page: 1,
   totalPages: 1,
   isLoading: false,

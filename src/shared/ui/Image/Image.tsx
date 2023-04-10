@@ -17,7 +17,7 @@ export const Image = ({ src, alt, className = '' }: ComponentPropsWithoutRef<'im
           src={src}
           alt={alt}
           onError={() => setError(true)}
-          className={`rounded group-hover:scale-105 transition-transform`}
+          className={`rounded sm:group-hover:scale-105 transition-transform`}
         />
       )}
     </div>

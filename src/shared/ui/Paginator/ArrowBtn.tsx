@@ -7,7 +7,7 @@ type ArrowBtnProps = {
 
 export const ArrowBtn = ({ side, ...restProps }: ArrowBtnProps) => (
   <button
-    className="px-4 py-2 border-t border-t-neutral-900 dark:border-t-neutral-100 hover:border-t-pink-900 hover:dark:border-t-pink-100 transition-colors"
+    className="px-4 py-2 border-t border-t-neutral-900 dark:border-t-neutral-100 sm:hover:border-t-pink-900 hover:dark:border-t-pink-100 transition-colors"
     {...restProps}
   >
     {side === 'left' && <RiArrowLeftSLine />}

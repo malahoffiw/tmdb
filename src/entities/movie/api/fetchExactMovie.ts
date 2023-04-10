@@ -5,8 +5,14 @@ const fetchExactMovieCredits = async (movieId: number) => {
   return response.json();
 };
 
-const fetchExactMovieSimilar = async (movieId: number) => {
-  const response = await fetchApi(`/3/movie/${movieId}/similar?api_key=${process.env.REACT_APP_API_KEY}`);
+const fetchExactMovieRecommended = async (movieId: number) => {
+  const response = await fetchApi(`/3/movie/${movieId}/recommendations?api_key=${process.env.REACT_APP_API_KEY}`);
+  const data = await response.json();
+  return data.results;
+};
+
+const fetchExactMovieReviews = async (movieId: number) => {
+  const response = await fetchApi(`/3/movie/${movieId}/reviews?api_key=${process.env.REACT_APP_API_KEY}`);
   const data = await response.json();
   return data.results;
 };
@@ -16,12 +22,14 @@ const fetchExactMovie = async (movieId: number) => {
 
   const movie = await response.json();
   const credits = await fetchExactMovieCredits(movieId);
-  const similar = await fetchExactMovieSimilar(movieId);
+  const recommended = await fetchExactMovieRecommended(movieId);
+  const reviews = await fetchExactMovieReviews(movieId);
 
   return {
     ...movie,
     credits,
-    similar,
+    recommended,
+    reviews,
   };
 };
 

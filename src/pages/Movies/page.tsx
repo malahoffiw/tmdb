@@ -6,7 +6,7 @@ import { useAppSelector } from 'shared/lib/hooks/useAppSelector';
 import { ListCard, VerticalList, Loader } from 'shared/ui';
 import { IMAGE_URL } from 'shared/api';
 import { SelectFilter } from '../../features/selectFilter';
-import { SelectPage } from '../../features/selectPage/ui/SelectPage';
+import { SelectPage } from '../../features/selectPage';
 import { Link } from 'react-router-dom';
 
 export const Movies = () => {

@@ -12,19 +12,27 @@ export interface Movie {
   releaseDate: string;
   runtime: number;
   genres: Genre[];
-  similarMovies: MovieShort[];
+  recommendedMovies: MovieShort[];
   cast: CastPerson[];
+  reviews: Review[];
+}
+
+export type MovieShort = Pick<Movie, 'id' | 'title' | 'posterPath' | 'favorite'>;
+
+interface Review {
+  id: number;
+  author: string;
+  content: string;
+  createdAt: string;
+}
+
+interface Genre {
+  id: number;
+  name: string;
 }
 
 interface CastPerson {
   id: number;
   name: string;
   imagePath: string;
-}
-
-export type MovieShort = Pick<Movie, 'id' | 'title' | 'posterPath' | 'favorite'>;
-
-export interface Genre {
-  id: number;
-  name: string;
 }

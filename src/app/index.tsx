@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import { store } from './store';
-import { Favorite, Layout, Movies, People, Rated, Home, ErrorBoundary, Fallback } from 'pages';
+import { Favorite, Layout, Movies, People, Home, ErrorBoundary, Fallback } from 'pages';
 import { ThemeProvider } from 'features/toggleTheme';
 import { ExactMovie } from '../pages/Movies/[id]/page';
 
@@ -18,7 +18,6 @@ export const App = () => {
               <Route path="movies/:id" element={<ExactMovie />} />
               <Route path="people" element={<People />} />
               <Route path="favorite" element={<Favorite />} />
-              <Route path="rated" element={<Rated />} />
             </Route>
           </Routes>
         </Provider>

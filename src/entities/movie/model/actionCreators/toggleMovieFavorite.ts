@@ -11,12 +11,12 @@ export const toggleMovieFavorite = (movie: MovieShort): AppThunk => {
     const nextFavorite = isFavorite
       ? prevFavorite.filter((item: MovieShort) => item.id !== movie.id)
       : [
-          ...prevFavorite,
           {
             id: movie.id,
             title: movie.title,
             posterPath: movie.posterPath,
           },
+          ...prevFavorite,
         ];
     localStorage.setItem('favoriteMovies', JSON.stringify(nextFavorite));
   };
