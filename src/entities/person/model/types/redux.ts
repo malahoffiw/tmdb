@@ -2,6 +2,7 @@ import { PersonShort } from './person';
 
 export interface PeopleState {
   people: PersonShort[];
+  queryPeople: PersonShort[];
   isLoading: boolean;
   error: string | null;
   page: number;
@@ -13,7 +14,10 @@ export type PeopleAction =
   | GetPeopleSuccessAction
   | GetPeopleErrorAction
   | GetPeopleTotalPagesAction
-  | SetPeoplePageAction;
+  | SetPeoplePageAction
+  | GetQueryPeopleAction
+  | GetQueryPeopleSuccessAction
+  | GetQueryPeopleErrorAction;
 
 interface GetPeopleAction {
   type: 'GET_PEOPLE';
@@ -33,4 +37,15 @@ interface GetPeopleTotalPagesAction {
 interface SetPeoplePageAction {
   type: 'SET_PEOPLE_PAGE';
   payload: number;
+}
+interface GetQueryPeopleAction {
+  type: 'GET_QUERY_PEOPLE';
+}
+interface GetQueryPeopleSuccessAction {
+  type: 'GET_QUERY_PEOPLE_SUCCESS';
+  payload: PersonShort[];
+}
+interface GetQueryPeopleErrorAction {
+  type: 'GET_QUERY_PEOPLE_ERROR';
+  payload: string;
 }

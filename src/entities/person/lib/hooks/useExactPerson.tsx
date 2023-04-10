@@ -17,8 +17,8 @@ export const useExactPerson = (id: number) => {
         favorite: true,
       })
     );
-    try {
-      fetchExactPerson(id).then((res) => {
+    fetchExactPerson(id)
+      .then((res) => {
         setPerson({
           id: res.id,
           name: res.name,
@@ -27,27 +27,29 @@ export const useExactPerson = (id: number) => {
           placeOfBirth: res.place_of_birth,
           birthday: res.birthday ?? '',
           deathday: res.deathday ?? '',
-          credits: res.credits.cast.map((movie: { id: number; title: string; poster_path: string }) => ({
-            id: movie.id,
-            title: movie.title,
-            posterPath: movie.poster_path,
-            favorite: !!favorite.find((item: MovieShort) => item.id === movie.id),
-          })),
+          credits: res.credits.cast
+            .filter((media: { media_type: 'movie' | 'tv' }) => media.media_type === 'movie')
+            .map((movie: { id: number; title: string; poster_path: string }) => ({
+              id: movie.id,
+              title: movie.title,
+              posterPath: movie.poster_path,
+              favorite: !!favorite.find((item: MovieShort) => item.id === movie.id),
+            })),
         });
 
         setIsLoading(false);
+      })
+      .catch((error) => {
+        if (error instanceof Error) {
+          console.warn(error);
+          setIsLoading(false);
+          setError(error.message);
+        } else {
+          console.warn('Something went wrong at "GET_EXACT_MOVIE" action');
+          setIsLoading(false);
+          setError('Something went wrong at "GET_EXACT_MOVIE" action');
+        }
       });
-    } catch (error) {
-      if (error instanceof Error) {
-        console.warn(error.message);
-        setIsLoading(false);
-        setError(error.message);
-      } else {
-        console.warn('Something went wrong at "GET_EXACT_MOVIE" action');
-        setIsLoading(false);
-        setError('Something went wrong at "GET_EXACT_MOVIE" action');
-      }
-    }
   }, [id]);
 
   return { person, isLoading, error };

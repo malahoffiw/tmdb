@@ -2,6 +2,7 @@ import { PeopleAction, PeopleState } from './types/redux';
 
 const initialState: PeopleState = {
   people: [],
+  queryPeople: [],
   isLoading: false,
   error: null,
   page: 1,
@@ -20,6 +21,12 @@ export const peopleReducer = (state = initialState, action: PeopleAction): Peopl
       return { ...state, totalPages: action.payload };
     case 'SET_PEOPLE_PAGE':
       return { ...state, page: action.payload };
+    case 'GET_QUERY_PEOPLE':
+      return { ...state, isLoading: true, error: null };
+    case 'GET_QUERY_PEOPLE_SUCCESS':
+      return { ...state, queryPeople: action.payload, isLoading: false };
+    case 'GET_QUERY_PEOPLE_ERROR':
+      return { ...state, isLoading: false, error: action.payload };
     default:
       return state;
   }

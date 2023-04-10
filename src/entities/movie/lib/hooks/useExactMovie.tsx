@@ -20,7 +20,7 @@ export const useExactMovie = (id: number) => {
         favorite: currentMovie.favorite,
       });
     }
-  }, [currentMovie, currentMovie?.favorite]);
+  }, [currentMovie, currentMovie?.favorite, movie]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -31,8 +31,8 @@ export const useExactMovie = (id: number) => {
         favorite: true,
       })
     );
-    try {
-      fetchExactMovie(id).then((res) => {
+    fetchExactMovie(id)
+      .then((res) => {
         setMovie({
           favorite: !!favorite.find((item: MovieShort) => item.id === res.id),
           id: res.id,
@@ -47,22 +47,31 @@ export const useExactMovie = (id: number) => {
           releaseDate: res.release_date,
           runtime: res.runtime,
           genres: res.genres,
-          recommendedMovies: res.recommended.map((movie: { id: number; title: string; poster_path: string }) => ({
-            id: movie.id,
-            title: movie.title,
-            posterPath: movie.poster_path,
-          })),
-          cast: res.credits.cast.map((person: { id: number; name: string; profile_path: string }) => ({
-            id: person.id,
-            name: person.name,
-            imagePath: person.profile_path,
-          })),
-          reviews: res.reviews.map((review: { id: number; author: string; content: string; created_at: string }) => ({
-            id: review.id,
-            author: review.author,
-            content: review.content,
-            createdAt: review.created_at,
-          })),
+          recommendedMovies:
+            res.recommended !== undefined
+              ? res.recommended.map((movie: { id: number; title: string; poster_path: string }) => ({
+                  id: movie.id,
+                  title: movie.title,
+                  posterPath: movie.poster_path,
+                }))
+              : [],
+          cast:
+            res.credits !== undefined
+              ? res.credits.cast.map((person: { id: number; name: string; profile_path: string }) => ({
+                  id: person.id,
+                  name: person.name,
+                  imagePath: person.profile_path,
+                }))
+              : [],
+          reviews:
+            res.reviews !== undefined
+              ? res.reviews.map((review: { id: number; author: string; content: string; created_at: string }) => ({
+                  id: review.id,
+                  author: review.author,
+                  content: review.content,
+                  createdAt: review.created_at,
+                }))
+              : [],
         });
 
         if (!movies.find((item: MovieShort) => item.id === res.id)) {
@@ -83,18 +92,18 @@ export const useExactMovie = (id: number) => {
         }
 
         setIsLoading(false);
+      })
+      .catch((error) => {
+        if (error instanceof Error) {
+          console.warn(error);
+          setIsLoading(false);
+          setError(error.message);
+        } else {
+          console.warn('Something went wrong at "GET_EXACT_MOVIE" action');
+          setIsLoading(false);
+          setError('Something went wrong at "GET_EXACT_MOVIE" action');
+        }
       });
-    } catch (error) {
-      if (error instanceof Error) {
-        console.warn(error.message);
-        setIsLoading(false);
-        setError(error.message);
-      } else {
-        console.warn('Something went wrong at "GET_EXACT_MOVIE" action');
-        setIsLoading(false);
-        setError('Something went wrong at "GET_EXACT_MOVIE" action');
-      }
-    }
   }, [id]);
 
   return { movie, isLoading, error };

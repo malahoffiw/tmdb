@@ -30,21 +30,21 @@ export const Layout = () => {
         {windowWidth.current > 1024 ? (
           <NavBar>
             <NavLink to="/">
-              <AiOutlineHome size={20} />
+              <AiOutlineHome size={18} />
             </NavLink>
             <NavLink to="/movies">
-              <RiMovie2Line size={20} />
+              <RiMovie2Line size={18} />
             </NavLink>
             <NavLink to="/people">
-              <BsPerson size={20} />
+              <BsPerson size={18} />
             </NavLink>
             <NavLink to="/favorite">
-              <BsStar size={20} />
+              <BsStar size={18} />
             </NavLink>
           </NavBar>
         ) : (
           <HeaderButton onClick={handleOpenModal}>
-            <HiMenu />
+            <HiMenu size={18} />
           </HeaderButton>
         )}
         <ToggleTheme />

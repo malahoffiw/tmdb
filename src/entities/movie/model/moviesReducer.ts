@@ -2,6 +2,7 @@ import { MoviesAction, MoviesState } from './types';
 
 const initialState: MoviesState = {
   movies: [],
+  queryMovies: [],
   movieType: 'top_rated',
   page: 1,
   totalPages: 1,
@@ -33,6 +34,12 @@ export const moviesReducer = (state = initialState, action: MoviesAction): Movie
           return movie;
         }),
       };
+    case 'GET_QUERY_MOVIES':
+      return { ...state, isLoading: true, error: null };
+    case 'GET_QUERY_MOVIES_SUCCESS':
+      return { ...state, queryMovies: action.payload, isLoading: false };
+    case 'GET_QUERY_MOVIES_ERROR':
+      return { ...state, isLoading: false, error: action.payload };
     default:
       return state;
   }

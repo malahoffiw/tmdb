@@ -2,6 +2,7 @@ import { MovieShort } from './movie';
 
 export interface MoviesState {
   movies: MovieShort[];
+  queryMovies: MovieShort[];
   movieType: MovieType;
   isLoading: boolean;
   error: string | null;
@@ -18,7 +19,10 @@ export type MoviesAction =
   | GetMoviesTotalPagesAction
   | SetMoviesPageAction
   | SetMovieTypeAction
-  | ToggleMovieFavoriteAction;
+  | ToggleMovieFavoriteAction
+  | GetQueryMoviesAction
+  | GetQueryMoviesSuccessAction
+  | GetQueryMoviesErrorAction;
 
 interface GetMoviesAction {
   type: 'GET_MOVIES';
@@ -46,4 +50,15 @@ interface SetMovieTypeAction {
 interface ToggleMovieFavoriteAction {
   type: 'TOGGLE_MOVIE_FAVORITE';
   payload: number;
+}
+interface GetQueryMoviesAction {
+  type: 'GET_QUERY_MOVIES';
+}
+interface GetQueryMoviesSuccessAction {
+  type: 'GET_QUERY_MOVIES_SUCCESS';
+  payload: MovieShort[];
+}
+interface GetQueryMoviesErrorAction {
+  type: 'GET_QUERY_MOVIES_ERROR';
+  payload: string;
 }
