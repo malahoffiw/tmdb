@@ -1,5 +1,5 @@
 export type Theme = 'dark' | 'light';
-export type ThemeCtx = {
+export interface ThemeCtx {
   theme: Theme;
   toggleTheme: () => void;
-};
+}

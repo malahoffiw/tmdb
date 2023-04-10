@@ -1,4 +1,4 @@
-import { MovieShort } from '../../../movie/model/types';
+import { MovieShort } from 'entities/movie';
 
 export interface Person {
   id: number;

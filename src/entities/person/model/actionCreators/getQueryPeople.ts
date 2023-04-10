@@ -7,7 +7,7 @@ export const getQueryPeople = (query: string): AppThunk => {
       dispatch({ type: 'GET_QUERY_PEOPLE' });
 
       const response = await fetchQueryPeople(query);
-      const people = response.results.map((person: any) => ({
+      const people = response.results.map((person: { id: number; name: string; profile_path: string }) => ({
         id: person.id,
         name: person.name,
         imagePath: person.profile_path,

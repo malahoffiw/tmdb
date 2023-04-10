@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { FiMoon, FiSun } from 'react-icons/fi';
 
-import { ThemeContext } from 'features/toggleTheme';
+import { ThemeContext } from 'features';
 import { HeaderButton } from 'shared/ui';
 
 export const ToggleTheme = () => {

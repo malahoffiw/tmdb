@@ -6,7 +6,6 @@ export const toggleMovieFavorite = (movie: MovieShort): AppThunk => {
     dispatch({ type: 'TOGGLE_MOVIE_FAVORITE', payload: movie.id });
 
     const prevFavorite = JSON.parse(localStorage.getItem('favoriteMovies') || '[]');
-
     const isFavorite = !!prevFavorite.find((item: MovieShort) => item.id === movie.id);
     const nextFavorite = isFavorite
       ? prevFavorite.filter((item: MovieShort) => item.id !== movie.id)
@@ -18,6 +17,7 @@ export const toggleMovieFavorite = (movie: MovieShort): AppThunk => {
           },
           ...prevFavorite,
         ];
+
     localStorage.setItem('favoriteMovies', JSON.stringify(nextFavorite));
   };
 };

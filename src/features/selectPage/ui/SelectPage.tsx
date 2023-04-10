@@ -1,17 +1,13 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
-import { useMoviesActions } from '../../../entities/movie/lib';
-import { useAppSelector } from '../../../shared/lib/hooks/useAppSelector';
 import { getPagesForPagination } from '../lib/getPagesForPagination';
-import { Paginator } from '../../../shared/ui/Paginator/Paginator';
-import { ArrowBtn } from '../../../shared/ui/Paginator/ArrowBtn';
-import { PagesBase, PagesXs } from '../../../shared/ui/Paginator/Pages';
-import { Page } from '../../../shared/ui/Paginator/Page';
-import { Dots } from '../../../shared/ui/Paginator/Dots';
-import { usePeopleActions } from '../../../entities/person/lib/hooks/usePeopleActions';
+import { useMoviesActions } from 'entities/movie';
+import { usePeopleActions } from 'entities/person';
+import { useWindowWidth, useAppSelector } from 'shared/lib';
+import { Dots, Page, Paginator, ArrowBtn, PagesBase, PagesXs } from 'shared/ui';
 
 export const SelectPage = ({ type }: { type: 'movies' | 'people' }) => {
-  const windowWidth = useRef(window.innerWidth);
+  const { isScreenSm } = useWindowWidth();
   const { page, totalPages } = useAppSelector((state) => state[type]);
   const { setMoviesPage } = useMoviesActions();
   const { setPeoplePage } = usePeopleActions();
@@ -42,7 +38,7 @@ export const SelectPage = ({ type }: { type: 'movies' | 'people' }) => {
   return (
     <Paginator>
       <ArrowBtn side="left" onClick={handlePrevPage} disabled={page <= 1} />
-      {windowWidth.current < 640 ? (
+      {!isScreenSm ? (
         <PagesXs page={page} totalPages={totalPages} />
       ) : (
         <PagesBase>

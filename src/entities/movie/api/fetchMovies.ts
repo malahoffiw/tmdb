@@ -1,5 +1,5 @@
-import { fetchApi } from 'shared/api/setup';
-import { MovieType } from '../model/types';
+import { fetchApi } from 'shared/api';
+import { MovieType } from '../model';
 
 const fetchMoviesTopRated = async (page: number) => {
   const response = await fetchApi(`/3/movie/top_rated?api_key=${process.env.REACT_APP_API_KEY}&page=${page}`);
@@ -36,4 +36,4 @@ const fetchMoviesByType = async (page: number, type: MovieType) => {
   }
 };
 
-export { fetchMoviesTopRated, fetchMoviesLatest, fetchMoviesPopular, fetchMoviesUpcoming, fetchMoviesByType };
+export { fetchMoviesByType };

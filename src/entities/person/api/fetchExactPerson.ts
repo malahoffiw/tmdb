@@ -1,4 +1,4 @@
-import { fetchApi } from '../../../shared/api/setup';
+import { fetchApi } from 'shared/api';
 
 const fetchExactPersonCredits = async (personId: number) => {
   const response = await fetchApi(`/3/person/${personId}/combined_credits?api_key=${process.env.REACT_APP_API_KEY}`);

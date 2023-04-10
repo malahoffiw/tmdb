@@ -1,6 +1,12 @@
-export * from './Header';
-export * from './List';
-export * from './Menu';
-export * from './Select';
-export * from './Loader';
+export * as ExactPage from './ExactPage';
 export * from './Favorite';
+export * from './Header';
+export * from './Image';
+export * from './List';
+export * from './Loader';
+export * from './Menu';
+export * from './Page';
+export * from './Paginator';
+export * from './Prim';
+export * from './Search';
+export * from './Select';

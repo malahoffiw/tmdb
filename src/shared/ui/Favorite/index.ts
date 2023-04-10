@@ -1,2 +1,1 @@
-export * from './FavoriteList';
-export * from './FavoriteCard';
+export * as Favorite from './List';

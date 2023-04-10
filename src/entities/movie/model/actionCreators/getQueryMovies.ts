@@ -1,6 +1,6 @@
 import { AppThunk } from 'app/store';
+import { fetchQueryMovies } from '../../api';
 import { MovieShort } from '../types';
-import { fetchQueryMovies } from '../../api/fetchQueryMovies';
 
 export const getQueryMovies = (query: string): AppThunk => {
   return async (dispatch) => {
@@ -10,7 +10,7 @@ export const getQueryMovies = (query: string): AppThunk => {
       const favorite: MovieShort[] = JSON.parse(localStorage.getItem('favoriteMovies') || '[]');
 
       const response = await fetchQueryMovies(query);
-      const movies = response.results.map((movie: any) => {
+      const movies = response.results.map((movie: { id: number; title: string; poster_path: string }) => {
         return {
           id: movie.id,
           title: movie.title,

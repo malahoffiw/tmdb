@@ -1,9 +1,8 @@
 import { ChangeEvent } from 'react';
 
-import { MovieType } from 'entities/movie/model/types';
-import { useMoviesActions } from 'entities/movie/lib';
+import { MovieType, useMoviesActions } from 'entities/movie';
+import { useAppSelector } from 'shared/lib';
 import { Select } from 'shared/ui';
-import { useAppSelector } from 'shared/lib/hooks/useAppSelector';
 
 const options = [
   { value: 'top_rated', label: 'Top Rated' },

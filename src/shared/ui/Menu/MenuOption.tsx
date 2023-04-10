@@ -9,7 +9,8 @@ type MenuOptionProps = {
 export const MenuOption = ({ children, to, match, ...restProps }: MenuOptionProps) => (
   <Link
     to={to}
-    className="grid grid-cols-[16px_1fr_16px] gap-2 items-center border-b border-pink-900 dark:border-pink-100 py-4 px-6 text-pink-900 dark:text-pink-100"
+    className="grid grid-cols-[16px_1fr_16px] gap-2 items-center border-b py-4 px-6
+              border-pink-900 dark:border-pink-100 text-pink-900 dark:text-pink-100"
     {...restProps}
   >
     <div>{match && <RxDotFilled />}</div>

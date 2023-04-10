@@ -1,15 +1,13 @@
-import { Component, ErrorInfo, PropsWithChildren, ReactNode } from 'react';
+import { Component, ErrorInfo, PropsWithChildren } from 'react';
 
-type ErrorBoundaryProps = {
-  fallback: ReactNode;
-} & PropsWithChildren;
+import { ErrorPage } from 'shared/ui';
 
 type ErrorBoundaryState = {
   hasError: boolean;
 };
 
-export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
-  constructor(props: ErrorBoundaryProps) {
+export class ErrorBoundary extends Component<PropsWithChildren, ErrorBoundaryState> {
+  constructor(props: PropsWithChildren) {
     super(props);
     this.state = { hasError: false };
   }
@@ -24,7 +22,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
 
   render() {
     if (this.state.hasError) {
-      return this.props.fallback;
+      return <ErrorPage />;
     }
 
     return this.props.children;

@@ -9,7 +9,9 @@ export const NavOption = ({ children, to, match }: NavLinkProps) => (
     to={to}
     className={`${
       match ? 'border-b-neutral-100 dark:border-b-neutral-900' : ''
-    } py-4 px-6 border-b-2 transition-colors border-pink-900 dark:border-pink-100 text-neutral-100 dark:text-neutral-900 hover:border-neutral-100 hover:dark:border-neutral-900`}
+    } py-4 px-6 border-b-2 transition-colors border-pink-900 
+      dark:border-pink-100 text-neutral-100 dark:text-neutral-900 
+      hover:border-neutral-100 hover:dark:border-neutral-900`}
   >
     {children}
   </Link>

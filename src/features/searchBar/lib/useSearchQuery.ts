@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from 'react';
-import useDebounce from '../../../shared/lib/hooks/useDebounce';
+
+import { useDebounce } from 'shared/lib';
 
 export const useSearchQuery = () => {
   const [query, setQuery] = useState('');

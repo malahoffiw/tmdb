@@ -1,4 +1,4 @@
-import { PeopleAction, PeopleState } from './types/redux';
+import { PeopleAction, PeopleState } from './types';
 
 const initialState: PeopleState = {
   people: [],

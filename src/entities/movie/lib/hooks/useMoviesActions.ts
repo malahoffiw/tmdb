@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux';
 
-import { useAppDispatch } from '../../../../shared/lib/hooks/useAppDispatch';
-import * as MoviesActions from '../../model/actionCreators';
+import * as MoviesActions from '../../model';
+import { useAppDispatch } from 'shared/lib';
 
 export const useMoviesActions = () => {
   const dispatch = useAppDispatch();

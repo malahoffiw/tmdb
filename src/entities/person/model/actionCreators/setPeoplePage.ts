@@ -1,4 +1,4 @@
-import { PeopleAction } from '../types/redux';
+import { PeopleAction } from '../types';
 
 export const setPeoplePage = (page: number): PeopleAction => ({
   type: 'SET_PEOPLE_PAGE',

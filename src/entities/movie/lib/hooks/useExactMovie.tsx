@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Movie, MovieShort } from '../../model/types';
+
+import { Movie, MovieShort } from '../../model';
 import { fetchExactMovie } from '../../api';
-import { useAppSelector } from '../../../../shared/lib/hooks/useAppSelector';
-import { useAppDispatch } from '../../../../shared/lib/hooks/useAppDispatch';
+import { useAppSelector, useAppDispatch } from 'shared/lib';
 
 export const useExactMovie = (id: number) => {
   const [movie, setMovie] = useState<Movie | null>(null);
@@ -77,7 +77,7 @@ export const useExactMovie = (id: number) => {
         if (!movies.find((item: MovieShort) => item.id === res.id)) {
           dispatch({
             type: 'GET_MOVIES_SUCCESS',
-            payload: !!favorite.find((item: MovieShort) => item.id === res.id)
+            payload: favorite.find((item: MovieShort) => item.id === res.id)
               ? favorite
               : [
                   ...favorite,

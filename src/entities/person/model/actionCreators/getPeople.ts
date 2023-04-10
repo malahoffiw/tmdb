@@ -7,7 +7,7 @@ export const getPeople = (page: number): AppThunk => {
       dispatch({ type: 'GET_PEOPLE' });
 
       const response = await fetchPeople(page);
-      const people = response.results.map((person: any) => ({
+      const people = response.results.map((person: { id: number; name: string; profile_path: string }) => ({
         id: person.id,
         name: person.name,
         imagePath: person.profile_path,

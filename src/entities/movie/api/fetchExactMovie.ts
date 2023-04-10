@@ -1,4 +1,4 @@
-import { fetchApi } from 'shared/api/setup';
+import { fetchApi } from 'shared/api';
 
 const fetchExactMovieCredits = async (movieId: number) => {
   const response = await fetchApi(`/3/movie/${movieId}/credits?api_key=${process.env.REACT_APP_API_KEY}`);

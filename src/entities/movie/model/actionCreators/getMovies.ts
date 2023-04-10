@@ -10,7 +10,7 @@ export const getMovies = (page: number, type: MovieType): AppThunk => {
       const favorite: MovieShort[] = JSON.parse(localStorage.getItem('favoriteMovies') || '[]');
 
       const response = await fetchMoviesByType(page, type);
-      const movies = response.results.map((movie: any) => {
+      const movies = response.results.map((movie: { id: number; title: string; poster_path: string }) => {
         return {
           id: movie.id,
           title: movie.title,

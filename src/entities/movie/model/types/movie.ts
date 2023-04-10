@@ -1,3 +1,5 @@
+import { PersonShort } from 'entities/person';
+
 export interface Movie {
   id: number;
   imdbId: string;
@@ -13,7 +15,7 @@ export interface Movie {
   runtime: number;
   genres: Genre[];
   recommendedMovies: MovieShort[];
-  cast: CastPerson[];
+  cast: PersonShort[];
   reviews: Review[];
 }
 
@@ -29,10 +31,4 @@ interface Review {
 interface Genre {
   id: number;
   name: string;
-}
-
-interface CastPerson {
-  id: number;
-  name: string;
-  imagePath: string;
 }

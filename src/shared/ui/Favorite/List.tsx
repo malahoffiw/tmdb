@@ -1,8 +1,9 @@
-import { Image } from '../Image';
-import { BsStar, BsStarFill } from 'react-icons/bs';
+import { PropsWithChildren, MouseEvent } from 'react';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
-import { favoriteStarAnimation } from '../../lib/favoriteStarAnimation';
-import { MouseEvent } from 'react';
+import { BsStar, BsStarFill } from 'react-icons/bs';
+
+import { favoriteStarAnimation } from 'shared/lib';
+import { Image } from 'shared/ui';
 
 type CardProps = {
   title: string;
@@ -11,7 +12,7 @@ type CardProps = {
   onClick: (e: MouseEvent<HTMLDivElement>) => void;
 };
 
-export const FavoriteCard = ({ title, imageSrc, isFavorite, onClick }: CardProps) => {
+export const Card = ({ title, imageSrc, isFavorite, onClick }: CardProps) => {
   const [animationParent] = useAutoAnimate<HTMLDivElement>(favoriteStarAnimation);
 
   return (
@@ -32,3 +33,5 @@ export const FavoriteCard = ({ title, imageSrc, isFavorite, onClick }: CardProps
     </li>
   );
 };
+
+export const List = ({ children }: PropsWithChildren) => <ul className="flex flex-col gap-2">{children}</ul>;

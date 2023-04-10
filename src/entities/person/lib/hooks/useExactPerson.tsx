@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
+
 import { fetchExactPerson } from '../../api';
-import { Person } from '../../model/types';
-import { MovieShort } from '../../../movie/model/types';
+import { Person } from '../../model';
+import { MovieShort } from 'entities/movie';
 
 export const useExactPerson = (id: number) => {
   const [person, setPerson] = useState<Person | null>(null);

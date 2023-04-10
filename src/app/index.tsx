@@ -2,15 +2,13 @@ import { Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import { store } from './store';
-import { Favorite, Layout, Movies, People, Home, ErrorBoundary, Fallback } from 'pages';
-import { ThemeProvider } from 'features/toggleTheme';
-import { ExactMovie } from '../pages/Movies/[id]/page';
-import { ExactPerson } from '../pages/People/[id]/page';
+import { Favorites, Layout, Movies, People, Home, ErrorBoundary, ExactMovie, ExactPerson } from 'pages';
+import { ThemeProvider } from 'features';
 
 export const App = () => {
   return (
     <ThemeProvider>
-      <ErrorBoundary fallback={<Fallback />}>
+      <ErrorBoundary>
         <Provider store={store}>
           <Routes>
             <Route path="/" element={<Layout />}>
@@ -19,7 +17,7 @@ export const App = () => {
               <Route path="movies/:id" element={<ExactMovie />} />
               <Route path="people" element={<People />} />
               <Route path="people/:id" element={<ExactPerson />} />
-              <Route path="favorite" element={<Favorite />} />
+              <Route path="favorite" element={<Favorites />} />
             </Route>
           </Routes>
         </Provider>

@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux';
 
-import { useAppDispatch } from '../../../../shared/lib/hooks/useAppDispatch';
-import * as PeopleActions from '../../model/actionCreators';
+import * as PeopleActions from '../../model';
+import { useAppDispatch } from 'shared/lib';
 
 export const usePeopleActions = () => {
   const dispatch = useAppDispatch();
