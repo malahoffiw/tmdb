@@ -6,8 +6,8 @@ import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 import { HorizontalList, ListCard, Loader } from '../../../shared/ui';
 import { useExactMovie } from '../../../entities/movie/lib/hooks/useExactMovie';
-import { IMAGE_URL } from '../../../shared/api';
-import { useActions } from '../../../entities/movie/lib';
+import { IMAGE_URL } from 'shared/api/setup';
+import { useMoviesActions } from '../../../entities/movie/lib';
 import { favoriteStarAnimation } from '../../../shared/lib/favoriteStarAnimation';
 
 dayjs.extend(advancedFormat);
@@ -19,7 +19,7 @@ export const ExactMovie = () => {
   const [animationParent] = useAutoAnimate<HTMLButtonElement>(favoriteStarAnimation);
 
   const { movie, isLoading, error } = useExactMovie(+id);
-  const { toggleMovieFavorite } = useActions();
+  const { toggleMovieFavorite } = useMoviesActions();
 
   const handleStarClick = () => {
     if (!movie) {
@@ -94,11 +94,9 @@ export const ExactMovie = () => {
             <p className="mt-6 mb-2">Starring</p>
             <HorizontalList>
               {movie.cast.map((person) => (
-                <ListCard
-                  title={person.name}
-                  imageSrc={person.imagePath ? `${IMAGE_URL}${person.imagePath}` : ''}
-                  key={person.id}
-                />
+                <Link to={`/people/${person.id}`} key={person.id}>
+                  <ListCard title={person.name} imageSrc={person.imagePath ? `${IMAGE_URL}${person.imagePath}` : ''} />
+                </Link>
               ))}
             </HorizontalList>
           </>

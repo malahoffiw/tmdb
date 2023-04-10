@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react';
 
 import { getMovies } from 'entities/movie/model/actionCreators/getMovies';
-import { useActions } from 'entities/movie/lib/hooks/useActions';
+import { useMoviesActions } from 'entities/movie/lib/hooks/useMoviesActions';
 import { useAppSelector } from 'shared/lib/hooks/useAppSelector';
 import { ListCard, VerticalList, Loader } from 'shared/ui';
-import { IMAGE_URL } from 'shared/api';
+import { IMAGE_URL } from 'shared/api/setup';
 import { SelectFilter } from '../../features/selectFilter';
 import { SelectPage } from '../../features/selectPage';
 import { Link } from 'react-router-dom';
 
 export const Movies = () => {
   const { movies, isLoading, error, page, movieType } = useAppSelector((state) => state.movies);
-  const { getMovies } = useActions();
+  const { getMovies } = useMoviesActions();
 
   useEffect(() => {
     getMovies(page, movieType);
@@ -47,7 +47,7 @@ export const Movies = () => {
           </Link>
         ))}
       </VerticalList>
-      <SelectPage />
+      <SelectPage type="movies" />
     </div>
   );
 };

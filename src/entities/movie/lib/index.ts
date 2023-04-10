@@ -1,1 +1,1 @@
-export * from './hooks/useActions';
+export * from './hooks/useMoviesActions';

@@ -1,4 +1,4 @@
-import { fetchApi } from 'shared/api';
+import { fetchApi } from 'shared/api/setup';
 import { MovieType } from '../model/types';
 
 const fetchMoviesTopRated = async (page: number) => {

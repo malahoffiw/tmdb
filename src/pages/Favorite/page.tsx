@@ -1,6 +1,6 @@
 import { MovieShort } from '../../entities/movie/model/types';
 import { MdMovieCreation } from 'react-icons/md';
-import { IMAGE_URL } from '../../shared/api';
+import { IMAGE_URL } from 'shared/api/setup';
 import { FavoriteCard, FavoriteList, Loader } from 'shared/ui';
 import { Link } from 'react-router-dom';
 import { MouseEvent, useEffect, useState } from 'react';
