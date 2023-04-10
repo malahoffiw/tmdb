@@ -1,17 +1,40 @@
 import { useEffect, useState } from 'react';
-import { Movie } from '../../model/types';
+import { Movie, MovieShort } from '../../model/types';
 import { fetchExactMovie } from '../../api';
+import { useAppSelector } from '../../../../shared/lib/hooks/useAppSelector';
+import { useAppDispatch } from '../../../../shared/lib/hooks/useAppDispatch';
 
 export const useExactMovie = (id: number) => {
   const [movie, setMovie] = useState<Movie | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  const dispatch = useAppDispatch();
+  const { movies } = useAppSelector((state) => state.movies);
+  const currentMovie = movies.find((item: MovieShort) => item.id === id);
+
+  useEffect(() => {
+    if (movie && currentMovie && currentMovie.favorite !== movie.favorite) {
+      setMovie({
+        ...movie,
+        favorite: currentMovie.favorite,
+      });
+    }
+  }, [currentMovie, currentMovie?.favorite]);
+
   useEffect(() => {
     setIsLoading(true);
+
+    const favorite: MovieShort[] = JSON.parse(localStorage.getItem('favoriteMovies') || '[]').map(
+      (item: Omit<MovieShort, 'favorite'>) => ({
+        ...item,
+        favorite: true,
+      })
+    );
     try {
       fetchExactMovie(id).then((res) => {
         setMovie({
+          favorite: !!favorite.find((item: MovieShort) => item.id === res.id),
           id: res.id,
           imdbId: res.imdb_id,
           title: res.title,
@@ -35,6 +58,24 @@ export const useExactMovie = (id: number) => {
             imagePath: person.profile_path,
           })),
         });
+
+        if (!movies.find((item: MovieShort) => item.id === res.id)) {
+          dispatch({
+            type: 'GET_MOVIES_SUCCESS',
+            payload: !!favorite.find((item: MovieShort) => item.id === res.id)
+              ? favorite
+              : [
+                  ...favorite,
+                  {
+                    id: res.id,
+                    title: res.title,
+                    posterPath: res.poster_path,
+                    favorite: false,
+                  },
+                ],
+          });
+        }
+
         setIsLoading(false);
       });
     } catch (error) {

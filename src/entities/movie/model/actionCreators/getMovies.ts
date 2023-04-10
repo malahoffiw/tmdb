@@ -1,11 +1,13 @@
 import { AppThunk } from 'app/store';
 import { fetchMoviesByType } from '../../api';
-import { MovieType } from '../types';
+import { MovieShort, MovieType } from '../types';
 
 export const getMovies = (page: number, type: MovieType): AppThunk => {
   return async (dispatch) => {
     try {
       dispatch({ type: 'GET_MOVIES' });
+
+      const favorite: MovieShort[] = JSON.parse(localStorage.getItem('favoriteMovies') || '[]');
 
       const response = await fetchMoviesByType(page, type);
       const movies = response.results.map((movie: any) => {
@@ -13,6 +15,7 @@ export const getMovies = (page: number, type: MovieType): AppThunk => {
           id: movie.id,
           title: movie.title,
           posterPath: movie.poster_path,
+          favorite: !!favorite.find((item: MovieShort) => item.id === movie.id),
         };
       });
 

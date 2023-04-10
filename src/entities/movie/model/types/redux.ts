@@ -17,7 +17,8 @@ export type MoviesAction =
   | GetMoviesErrorAction
   | GetMoviesTotalPagesAction
   | SetMoviesPageAction
-  | SetMovieTypeAction;
+  | SetMovieTypeAction
+  | ToggleMovieFavoriteAction;
 
 interface GetMoviesAction {
   type: 'GET_MOVIES';
@@ -41,4 +42,8 @@ interface SetMoviesPageAction {
 interface SetMovieTypeAction {
   type: 'SET_MOVIE_TYPE';
   payload: MovieType;
+}
+interface ToggleMovieFavoriteAction {
+  type: 'TOGGLE_MOVIE_FAVORITE';
+  payload: number;
 }

@@ -23,6 +23,7 @@ module.exports = {
         light: '0 0 10px #d23669',
       },
       colors: {
+        yellow: '#ffba08',
         pink: {
           100: '#ffa7c4',
           900: '#d23669',

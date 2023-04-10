@@ -1,6 +1,7 @@
 export interface Movie {
   id: number;
   imdbId: string;
+  favorite: boolean;
   title: string;
   originalTitle: string;
   posterPath: string;
@@ -21,7 +22,7 @@ interface CastPerson {
   imagePath: string;
 }
 
-export type MovieShort = Pick<Movie, 'id' | 'title' | 'posterPath'>;
+export type MovieShort = Pick<Movie, 'id' | 'title' | 'posterPath' | 'favorite'>;
 
 export interface Genre {
   id: number;

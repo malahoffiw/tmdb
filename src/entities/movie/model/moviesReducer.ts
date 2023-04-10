@@ -23,6 +23,16 @@ export const moviesReducer = (state = initialState, action: MoviesAction): Movie
       return { ...state, page: action.payload };
     case 'SET_MOVIE_TYPE':
       return { ...state, movieType: action.payload, page: 1, isLoading: true };
+    case 'TOGGLE_MOVIE_FAVORITE':
+      return {
+        ...state,
+        movies: state.movies.map((movie) => {
+          if (movie.id === action.payload) {
+            return { ...movie, favorite: !movie.favorite };
+          }
+          return movie;
+        }),
+      };
     default:
       return state;
   }
