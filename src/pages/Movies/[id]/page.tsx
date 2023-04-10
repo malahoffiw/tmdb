@@ -57,20 +57,28 @@ export const ExactMovie = () => {
             ))}
           </div>
         </div>
-        <p className="mt-6 mb-2">Similar movies</p>
-        <HorizontalList>
-          {movie.similarMovies.map((movie) => (
-            <Link to={`/movies/${movie.id}`} key={movie.id}>
-              <ListCard title={movie.title} imageSrc={`${IMAGE_URL}${movie.posterPath}`} />
-            </Link>
-          ))}
-        </HorizontalList>
-        <p className="mt-6 mb-2">Starring</p>
-        <HorizontalList>
-          {movie.cast.map((person) => (
-            <ListCard title={person.name} imageSrc={`${IMAGE_URL}${person.imagePath}`} key={person.id} />
-          ))}
-        </HorizontalList>
+        {movie.similarMovies.length > 0 && (
+          <>
+            <p className="mt-6 mb-2">Similar movies</p>
+            <HorizontalList>
+              {movie.similarMovies.map((movie) => (
+                <Link to={`/movies/${movie.id}`} key={movie.id}>
+                  <ListCard title={movie.title} imageSrc={`${IMAGE_URL}${movie.posterPath}`} />
+                </Link>
+              ))}
+            </HorizontalList>
+          </>
+        )}
+        {movie.cast.length > 0 && (
+          <>
+            <p className="mt-6 mb-2">Starring</p>
+            <HorizontalList>
+              {movie.cast.map((person) => (
+                <ListCard title={person.name} imageSrc={`${IMAGE_URL}${person.imagePath}`} key={person.id} />
+              ))}
+            </HorizontalList>
+          </>
+        )}
       </div>
       <img
         className="md:sticky md:top-16 rounded drop-shadow-[0_35px_35px_rgba(0,0,0,0.25)]"

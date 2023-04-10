@@ -16,11 +16,11 @@ module.exports = {
         slideRight: {
           '0%': { transform: 'translateX(-100%)' },
           '100%': { transform: 'translateX(0)' },
-        }
+        },
       },
       dropShadow: {
-        'dark': '0 0 10px #ffa7c4',
-        'light': '0 0 10px #d23669',
+        dark: '0 0 10px #ffa7c4',
+        light: '0 0 10px #d23669',
       },
       colors: {
         pink: {
@@ -37,8 +37,8 @@ module.exports = {
           700: '#495057',
           800: '#343a40',
           900: '#212529',
-        }
-      }
+        },
+      },
     },
   },
   plugins: [],

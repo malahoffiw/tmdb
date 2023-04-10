@@ -8,6 +8,7 @@ export const useExactMovie = (id: number) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
     try {
       fetchExactMovie(id).then((res) => {
         setMovie({
@@ -39,13 +40,15 @@ export const useExactMovie = (id: number) => {
     } catch (error) {
       if (error instanceof Error) {
         console.warn(error.message);
+        setIsLoading(false);
         setError(error.message);
       } else {
         console.warn('Something went wrong at "GET_EXACT_MOVIE" action');
+        setIsLoading(false);
         setError('Something went wrong at "GET_EXACT_MOVIE" action');
       }
     }
-  }, []);
+  }, [id]);
 
   return { movie, isLoading, error };
 };
