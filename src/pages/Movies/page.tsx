@@ -14,7 +14,7 @@ export const Movies = () => {
 
   useEffect(() => {
     getMovies(page, movieType);
-  }, [page, movieType, getMovies]);
+  }, [page, movieType]);
 
   if (error) {
     return (
@@ -37,7 +37,9 @@ export const Movies = () => {
 
   return (
     <div className="flex flex-col gap-6 mt-16 mb-6 px-6 text-neutral-900 dark:text-neutral-100">
-      <h1 className="text-pink-900 dark:text-pink-100 sm:text-xl">Movies</h1>
+      <div>
+        <h1 className="text-pink-900 dark:text-pink-100 sm:text-xl">Movies</h1>
+      </div>
       <SelectFilter />
       <VerticalList>
         {movies.map((movie) => (

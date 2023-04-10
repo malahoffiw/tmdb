@@ -13,7 +13,7 @@ export const People = () => {
 
   useEffect(() => {
     getPeople(page);
-  }, [getPeople, page]);
+  }, [page]);
 
   if (error) {
     return (

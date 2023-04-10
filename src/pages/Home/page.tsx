@@ -16,7 +16,7 @@ export const Home = () => {
   useEffect(() => {
     getMovies(1, 'now_playing');
     getPeople(1);
-  }, [getMovies, getPeople]);
+  }, []);
 
   if (errorMovies || errorPeople) {
     return (
