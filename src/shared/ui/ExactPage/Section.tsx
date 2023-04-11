@@ -25,7 +25,7 @@ export const SectionScrolling = ({ children }: PropsWithChildren) => (
 export const Container = ({ children }: PropsWithChildren) => (
   <div
     className="container mx-auto grid grid-cols-1 md:grid-cols-[minmax(400px,_1fr)_minmax(240px,_300px)]
-                  gap-x-12 mt-16 mb-6 px-6 text-neutral-900 dark:text-neutral-100"
+                  gap-x-12 mt-16 mb-10 px-6 text-neutral-900 dark:text-neutral-100"
   >
     {children}
   </div>

@@ -19,5 +19,7 @@ export const Vertical = ({ children }: PropsWithChildren) => (
 );
 
 export const Horizontal = ({ children }: PropsWithChildren) => (
-  <ul className="grid grid-flow-col auto-cols-[150px] gap-x-2 overflow-x-auto rounded p-2">{children}</ul>
+  <ul className="grid grid-flow-col auto-cols-[150px] gap-x-2 overflow-x-auto overflow-y-hidden rounded p-2">
+    {children}
+  </ul>
 );

@@ -53,6 +53,7 @@ export const useExactMovie = (id: number) => {
                   id: movie.id,
                   title: movie.title,
                   posterPath: movie.poster_path,
+                  favorite: !!favorite.find((item: MovieShort) => item.id === movie.id),
                 }))
               : [],
           cast:
@@ -104,7 +105,7 @@ export const useExactMovie = (id: number) => {
           setError('Something went wrong at "GET_EXACT_MOVIE" action');
         }
       });
-  }, [id]);
+  }, [dispatch, id, movies]);
 
   return { movie, isLoading, error };
 };
