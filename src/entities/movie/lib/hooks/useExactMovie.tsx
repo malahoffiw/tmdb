@@ -23,6 +23,7 @@ export const useExactMovie = (id: number) => {
   }, [currentMovie, currentMovie?.favorite, movie]);
 
   useEffect(() => {
+    if (movie?.id === id) return;
     setIsLoading(true);
 
     const favorite: MovieShort[] = JSON.parse(localStorage.getItem('favoriteMovies') || '[]').map(
@@ -105,7 +106,7 @@ export const useExactMovie = (id: number) => {
           setError('Something went wrong at "GET_EXACT_MOVIE" action');
         }
       });
-  }, [dispatch, id, movies]);
+  }, [dispatch, id, movie?.id, movies]);
 
   return { movie, isLoading, error };
 };
