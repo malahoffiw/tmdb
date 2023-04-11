@@ -1,11 +1,9 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 
-import { SelectFilter, SelectPage, SearchBar, useSearchQuery } from 'features';
+import { SelectFilter, SelectPage, SearchBar, useSearchQuery, Elements } from 'features';
 import { useMoviesActions } from 'entities/movie';
-import { IMAGE_URL } from 'shared/api';
 import { useAppSelector } from 'shared/lib';
-import { Heading, List, Container, LoadingPage, NotFoundPage, ErrorPage } from 'shared/ui';
+import { Heading, Container, LoadingPage, NotFoundPage, ErrorPage } from 'shared/ui';
 
 export const Movies = () => {
   const { movies, queryMovies, isLoading, error, page, movieType } = useAppSelector((state) => state.movies);
@@ -29,17 +27,7 @@ export const Movies = () => {
       </Container.Header>
       {debouncedQuery.length === 0 && <SelectFilter />}
       {moviesToDisplay.length === 0 && <NotFoundPage item="Movies" />}
-      {isLoading ? (
-        <LoadingPage />
-      ) : (
-        <List.Vertical>
-          {moviesToDisplay.map((movie) => (
-            <Link key={movie.id} to={`/movies/${movie.id}`}>
-              <List.Card title={movie.title} imageSrc={`${IMAGE_URL}${movie.posterPath}`} key={movie.id} />
-            </Link>
-          ))}
-        </List.Vertical>
-      )}
+      {isLoading ? <LoadingPage /> : <Elements.Table items={moviesToDisplay} />}
       {debouncedQuery.length === 0 && !isLoading && <SelectPage type="movies" />}
     </Container.Full>
   );

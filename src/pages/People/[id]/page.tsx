@@ -1,8 +1,8 @@
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
+import { Elements } from 'features';
 import { useExactPerson, getAgeData } from 'entities/person';
-import { IMAGE_URL } from 'shared/api';
-import { List, ExactPage, ErrorPage, LoadingPage } from 'shared/ui';
+import { ExactPage, ErrorPage, LoadingPage } from 'shared/ui';
 
 export const ExactPerson = () => {
   const { id } = useParams();
@@ -52,13 +52,7 @@ export const ExactPerson = () => {
         {person.credits.length > 0 && (
           <>
             <ExactPage.Paragraph>Movies</ExactPage.Paragraph>
-            <List.Horizontal>
-              {person.credits.map((movie) => (
-                <Link to={`/movies/${movie.id}`} key={movie.id}>
-                  <List.Card title={movie.title} imageSrc={movie.posterPath ? `${IMAGE_URL}${movie.posterPath}` : ''} />
-                </Link>
-              ))}
-            </List.Horizontal>
+            <Elements.Slider items={person.credits} />
           </>
         )}
       </ExactPage.SectionScrolling>

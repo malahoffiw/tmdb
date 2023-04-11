@@ -1,10 +1,10 @@
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
 import advancedFormat from 'dayjs/plugin/advancedFormat';
 
+import { Elements } from 'features';
 import { useExactMovie, useMoviesActions } from 'entities/movie';
-import { IMAGE_URL } from 'shared/api';
-import { List, ExactPage, ErrorPage, LoadingPage } from 'shared/ui';
+import { ExactPage, ErrorPage, LoadingPage } from 'shared/ui';
 
 dayjs.extend(advancedFormat);
 
@@ -54,13 +54,7 @@ export const ExactMovie = () => {
         {movie.cast.length > 0 && (
           <>
             <ExactPage.Paragraph>Starring</ExactPage.Paragraph>
-            <List.Horizontal>
-              {movie.cast.map((person) => (
-                <Link to={`/people/${person.id}`} key={person.id}>
-                  <List.Card title={person.name} imageSrc={person.imagePath ? `${IMAGE_URL}${person.imagePath}` : ''} />
-                </Link>
-              ))}
-            </List.Horizontal>
+            <Elements.Slider items={movie.cast} />
           </>
         )}
         {movie.reviews.length > 0 && (
@@ -72,13 +66,7 @@ export const ExactMovie = () => {
         {movie.recommendedMovies.length > 0 && (
           <>
             <ExactPage.Paragraph>Recommended movies</ExactPage.Paragraph>
-            <List.Horizontal>
-              {movie.recommendedMovies.map((movie) => (
-                <Link to={`/movies/${movie.id}`} key={movie.id}>
-                  <List.Card title={movie.title} imageSrc={movie.posterPath ? `${IMAGE_URL}${movie.posterPath}` : ''} />
-                </Link>
-              ))}
-            </List.Horizontal>
+            <Elements.Slider items={movie.recommendedMovies} />
           </>
         )}
       </ExactPage.SectionScrolling>
